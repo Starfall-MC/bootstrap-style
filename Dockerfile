@@ -1,8 +1,8 @@
 FROM node:20.8.1-alpine3.18 AS builder
 WORKDIR /app
-ADD package.json
-ADD package-lock.json
-ADD src
+ADD package.json .
+ADD package-lock.json .
+ADD src .
 RUN npm run css
 
 FROM nginx:1.25 AS runtime
