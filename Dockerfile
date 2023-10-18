@@ -7,4 +7,5 @@ ADD src/ src/
 RUN npm run css
 
 FROM nginx:1.25 AS runtime
-COPY --from=builder /app/dist/ /usr/share/nginx/html/
+RUN mkdir /usr/share/nginx/html/style
+COPY --from=builder /app/dist/ /usr/share/nginx/html/style/

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: style-bootstrap-svc
+
+spec:
+  ports:
+    - name: web
+      port: 80
+      targetPort: web
+
+  selector:
+    app: style-bootstrap
+
+---
+
+# Traefik-specific ingress, can configure custom Traefik props
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: style-bootstrap-ingress
+spec:
+  tls:
+    domains:
+      - main: interview.starfallmc.space
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`static.starfallmc.space`) && PathPrefix(`/style`)
+    kind: Rule
+    services:
+    - name: style-bootstrap-svc
+      port: web
