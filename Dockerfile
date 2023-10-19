@@ -8,5 +8,5 @@ RUN npm run css
 
 FROM nginx:1.25 AS runtime
 RUN mkdir /usr/share/nginx/html/style
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist/ /usr/share/nginx/html/style/
